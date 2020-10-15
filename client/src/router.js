@@ -2,6 +2,8 @@ import Vue from "vue";
 import Router from "vue-router";
 import AddCustomer from "./components/AddCustomer.vue";
 import Customer from "./components/Customer.vue";
+//import NavbarMenu from "./components/population/NavbarMenu.vue";
+import HomePopulation from "./components/population/HomePopulation.vue";
  
 Vue.use(Router);
  
@@ -14,9 +16,14 @@ export default new Router({
       component: AddCustomer
     },
     {
-        path: "/",
+        path: "/home",
+        name: "homePopulation",
+        component: HomePopulation
+    },
+    {
+        path: "/customer",
         name: "customer",
         component: Customer
-      }
+    }
   ]
 });

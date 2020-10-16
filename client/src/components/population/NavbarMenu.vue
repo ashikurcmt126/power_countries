@@ -34,7 +34,7 @@
         top: 0px;
         position: fixed;
         width: 100%;
-        z-index: 10;
+        z-index: 20;
     }
     .primaryMenu {
         background: #0A146E;

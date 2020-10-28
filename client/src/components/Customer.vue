@@ -29,8 +29,8 @@ export default {
     this.$store.dispatch('getUsers')
         .then(response => {
           console.log(response);
-              this.customers = this.$store.getters.returnAllUsers;
-        })
+          this.customers = this.$store.getters.returnAllUsers;
+    })
   }
 };
 </script>

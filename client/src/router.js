@@ -16,7 +16,7 @@ export default new Router({
       component: AddCustomer
     },
     {
-        path: "/home",
+        path: "/",
         name: "homePopulation",
         component: HomePopulation
     },

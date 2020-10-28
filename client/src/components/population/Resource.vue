@@ -2,57 +2,80 @@
     <div>
         <section id="beforeResource">
             <div class="tabButtonHeading">
-                    <h3>Bangladesh GDP Annual Growth Rate</h3>
+              <h3>Bangladesh GDP Annual Growth Rate</h3>
             </div>
             <div class="resource">
-                <div class="current-resource">
-                    <h4>Population of Bangladesh <span>(CURRENT)</span></h4>
-                    <h3>17,000000</h3>
+              <div class="current-resource">
+                <h4>Population of Bangladesh <span>(CURRENT)</span></h4>
+                <h3>17,000000</h3>
+              </div>
+
+              <div class="under-line">
+                <h5>Bangladesh Population (1950 - 2020)</h5>
+              </div>
+
+              <div id="tuntuni" class="graph-char">
+                <button v-if="show0" class="button" v-on:click = "showdata">Click To Show Chart</button>
+                <div v-if = "show">
+                  <apexchart height="400" width="750" type="line" :options="options" :series="series"></apexchart>
                 </div>
-                <div class="under-line">
-                    <h5>Bangladesh Population (1950 - 2020)</h5>
-                </div>
-                <div class="graph-char">
-                    <div>
-                        <apexchart height="400" width="750" type="line" :options="options" :series="series"></apexchart>
-                    </div>
-                </div>
-                <div class="details">
-                    <ul>
-                        <li><i class="fas fa-hand-point-right"></i> In 2020 population is 17,0000000.</li>
-                        <li><i class="fas fa-hand-point-right"></i> In 2019 population is 16,0000000.</li>
-                        <li><i class="fas fa-hand-point-right"></i> In 2018 population is 15,0000000.</li>
-                        <li><i class="fas fa-hand-point-right"></i> In 2017 population is 14,0000000.</li>
-                        <li><i class="fas fa-hand-point-right"></i> In 2016 population is 13,0000000.</li>
-                    </ul>
-                </div>
-                <div class="before-table-chart">
-                    <h5>Population of All Countries</h5>
-                </div>
-                <div class="table-chart">
-                   <GChart
-                    type="Table"
-                    :data="chartData"
-                    :options="details"
-                    />  
-                </div>    
+              </div>
+
+              <div class="details">
+                <ul>
+                  <li><i class="fas fa-hand-point-right"></i> In 2020 population is 17,0000000.</li>
+                  <li><i class="fas fa-hand-point-right"></i> In 2019 population is 16,0000000.</li>
+                  <li><i class="fas fa-hand-point-right"></i> In 2018 population is 15,0000000.</li>
+                  <li><i class="fas fa-hand-point-right"></i> In 2017 population is 14,0000000.</li>
+                  <li><i class="fas fa-hand-point-right"></i> In 2016 population is 13,0000000.</li>
+                </ul>
+              </div>
+
+              <div class="before-table-chart">
+                <h5>Population of All Countries</h5>
+              </div>
+                
+              <div class="table-chart">
+                <GChart
+                  type="Table"
+                  :data="chartData"
+                  :options="details"
+                />  
+              </div>
             </div>
-            amar desh
+
+            <div class="sidebar-relative">
+              <h5>Ashikur</h5>
+              <h5>Rahman</h5>
+              <h5>Rashid</h5>
+              <h5>Bangladesh</h5>
+              <h5>India</h5>
+            </div>
+            <div class="sidebar-compare">
+              
+            </div>
         </section>
     </div>
 </template>
  
 <script>
-import VueApexCharts from 'vue-apexcharts'
+import VueApexCharts from 'vue-apexcharts';
 import { GChart } from "vue-google-charts";
+//import axios from 'axios'
 
 export default {
       components: {
-        apexchart: VueApexCharts,
+       apexchart: VueApexCharts,
         GChart
     },
+    
   data() {
     return {
+        population: [],
+        firstName: 'Foo',
+         message: '123',
+         show: false,
+         show0:true,
       options: {
         chart: {
           id: 'vuechart-example'
@@ -61,26 +84,54 @@ export default {
           categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
         }
       },
+      
       series: [{
         name: 'series-1',
-        data: [3000, 4000, 4500, 5000, 4900, 6000, 7000, 9100]
+        data: [1000,2000,3000,4000]
       }],
-      chartData: [
-        ["Year", "Sales", "Expenses", "Profit"],
-        ["Chines", 1000, 400, 200],
-        ["Bangladesh", 1170, 460, 250],
-        ["India", 660, 1120, 300],
-        ["Japan", 1030, 540, 350]
-      ],
+      
+      chartData: [],
       details: {
         title: 'My Daily Activities'
         ,chartArea:{left:0,top:0,width:"100%",height:"100%"}
         ,width: 750
       }
     }
+  },
+  methods:{
+    showdata : function() {
+      this.show = !this.show;
+      this.show0= false            
+    }
+  },
+  computed: {
+  },
+  mounted(){
+    
+  },
+  created(){
+    console.log("ashikur")
+      this.$store.dispatch('getPopulation')
+        .then(response => {
+            console.log(response)
+          this.population = this.$store.getters.returnAllPopulation; 
+          console.log(this.population[0].country_id+5)
+          
+          for(let i=0;i<8;i++){
+            this.series[0].data[i]=this.population[1].country_id+i;
+
+            console.log(this.series[0].data[i]);
+          }
+        this.chartData.push(["Year", "Sales", "Expenses", "Profit"])
+        for (let i = 0; i < 5; i++) {
+            this.chartData.push([this.population[i].country_id,1000+i,400+i,200+i]);
+        }
+        })
   }
+  
 
 };
+
 
 </script>
  
@@ -128,6 +179,25 @@ export default {
     }
     .graph-char{
         z-index: 10;
+    }
+    button.button[data-v-f12aba60][data-v-f12aba60][data-v-f12aba60] {
+      background-color: #4E619B;
+      border: none;
+      color: #FFFFFF;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      outline: none;
+      text-transform: uppercase;
+      font-family: 'Yanone Kaffeesatz', sans-serif;
+      letter-spacing: 1.0px;
+      border-radius: 7px;
+      margin-top: 5px;
+      margin-left: 312px;
+      margin-bottom: 25px;
+      cursor: pointer;
     }
     .resource {
         padding: 14px 0px 5px 65px;

@@ -126,7 +126,7 @@
     button#searchBtn {
         border-radius: 10px;
         cursor: pointer;
-        color: red;
+        color: #12307E;
         outline: 0;
     }
 

@@ -21,5 +21,7 @@ db.sequelize = sequelize;
 
 //Models/tables
 db.customers = require('../model/customer.model.js')(sequelize, Sequelize);
+db.countries = require('../model/countries.model.js')(sequelize, Sequelize);
+db.populations = require('../model/population.model.js')(sequelize, Sequelize);
 
 module.exports = db;

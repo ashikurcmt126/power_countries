@@ -5,54 +5,63 @@
               <h3>Bangladesh GDP Annual Growth Rate</h3>
             </div>
             <div class="resource">
-              <div class="current-resource">
-                <h4>Population of Bangladesh <span>(CURRENT)</span></h4>
-                <h3>17,000000</h3>
-              </div>
-
-              <div class="under-line">
-                <h5>Bangladesh Population (1950 - 2020)</h5>
-              </div>
-
-              <div id="tuntuni" class="graph-char">
-                <button v-if="show0" class="button" v-on:click = "showdata">Click To Show Chart</button>
-                <div v-if = "show">
-                  <apexchart height="400" width="750" type="line" :options="options" :series="series"></apexchart>
+              <div class="resource-container">
+                <div class="current-resource">
+                  <h4>Population of Bangladesh <span>(CURRENT)</span></h4>
+                  <h3>17,000000</h3>
                 </div>
-              </div>
 
-              <div class="details">
-                <ul>
-                  <li><i class="fas fa-hand-point-right"></i> In 2020 population is 17,0000000.</li>
-                  <li><i class="fas fa-hand-point-right"></i> In 2019 population is 16,0000000.</li>
-                  <li><i class="fas fa-hand-point-right"></i> In 2018 population is 15,0000000.</li>
-                  <li><i class="fas fa-hand-point-right"></i> In 2017 population is 14,0000000.</li>
-                  <li><i class="fas fa-hand-point-right"></i> In 2016 population is 13,0000000.</li>
-                </ul>
-              </div>
+                <div class="under-line">
+                  <h5>Bangladesh Population (1950 - 2020)</h5>
+                </div>
 
-              <div class="before-table-chart">
-                <h5>Population of All Countries</h5>
-              </div>
+                <div id="tuntuni" class="graph-char">
+                  <button v-if="show0" class="button" v-on:click = "showdata">Click To Show Chart</button>
+                  <div v-if = "show">
+                    <apexchart height="400" width="750" type="line" :options="options" :series="series"></apexchart>
+                  </div>
+                </div>
+
+                <div class="details">
+                  <ul>
+                    <li><i class="fas fa-hand-point-right"></i> In 2020 population is 17,0000000.</li>
+                    <li><i class="fas fa-hand-point-right"></i> In 2019 population is 16,0000000.</li>
+                    <li><i class="fas fa-hand-point-right"></i> In 2018 population is 15,0000000.</li>
+                    <li><i class="fas fa-hand-point-right"></i> In 2017 population is 14,0000000.</li>
+                    <li><i class="fas fa-hand-point-right"></i> In 2016 population is 13,0000000.</li>
+                  </ul>
+                </div>
+
+                <div class="before-table-chart">
+                  <h5>Population of All Countries</h5>
+                </div>
                 
-              <div class="table-chart">
-                <GChart
-                  type="Table"
-                  :data="chartData"
-                  :options="details"
-                />  
-              </div>
-            </div>
+                <div class="table-chart">
+                  <GChart
+                    type="Table"
+                    :data="chartData"
+                    :options="details"
+                  />  
+                </div>
+              </div> 
 
+            </div>
             <div class="sidebar-relative">
-              <h5>Ashikur</h5>
-              <h5>Rahman</h5>
-              <h5>Rashid</h5>
-              <h5>Bangladesh</h5>
-              <h5>India</h5>
+              <p>Ashikur</p>
+              <p>Rahman</p>
+              <p>Rashid</p>
+              <p>Bangladesh</p>
+              <p>India</p>
             </div>
             <div class="sidebar-compare">
-              
+              <h4>Create a Comparison Chart</h4>
+              <input type="text" id="fcountry" name="firstCountry">
+              <h6>vs</h6>
+              <input type="text" id="scountry" name="secondCountry">
+              <br>
+              <button id="compare-button">
+                <h3>COMPARE</h3>
+              </button>
             </div>
         </section>
     </div>
@@ -72,8 +81,6 @@ export default {
   data() {
     return {
         population: [],
-        firstName: 'Foo',
-         message: '123',
          show: false,
          show0:true,
       options: {
@@ -216,6 +223,70 @@ export default {
     }
     .overflow{
         overflow: hidden;
+    }
+    .sidebar-relative {
+      background: #4E609C;
+      float: left;
+      width: 260px;
+      margin-top: 43px;
+      margin-left: 10px;
+      color: #FFFFFF;
+      cursor: pointer;
+      font-size: 13px;
+      font-family: 'Roboto', sans-serif;
+    }
+    .sidebar-relative p {
+      padding: 10px;
+      border: 1px solid black;
+    }
+    .sidebar-relative p:hover{
+      background: #EEEEEE;
+      color: black;
+    }
+    .sidebar-compare {
+      padding: 20px;
+      background: #4E609C;
+      float: left;
+      width: 260px;
+      margin-top: 50px;
+      margin-left: 10px;
+      color: #FFFFFF;
+      font-size: 13px;
+      font-family: 'Yanone Kaffeesatz', sans-serif;
+    }
+    .sidebar-compare h4 {
+      font-size: 20px;
+      padding-bottom: 20px;
+    }
+    .sidebar-compare input {
+      padding: 5px;
+      width: 175px;
+      margin-bottom: 10px;
+      color: black;
+      font-size: 15px;
+      letter-spacing: 0.8px;
+      padding-left: 1;
+    }
+    .sidebar-compare h6 {
+      margin-bottom: 8px;
+      padding-left: 83px;
+    }
+    button#compare-button {
+      background: #495057;
+      color: white;
+      padding: 6px 20px;
+      margin-left: 50px;
+      letter-spacing: 0.8px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 25px;
+      outline: none;
+    }
+    button#compare-button h3 {
+      font-size: 18px;
+    }
+    button#compare-button:hover{
+      background: #5A5F65;
     }
     .before-table-chart {
         background-color: #EEEEEE;

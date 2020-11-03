@@ -4,7 +4,7 @@
             <div class="primaryMenu">
                 <div class="nav-container">
                     <div class="logo">
-                        <h1>Ashikur</h1>
+                        <h1><a :href="'/'">CountriesPower</a></h1>
                     </div>
                     <div class="menuWrapper">
                         <div class="menu">
@@ -24,7 +24,34 @@
 </template>
  
 <script>
-
+import axios from 'axios'
+    export default {
+        components:{
+            
+        },
+    data() {
+      return {
+        categories:[]
+      };
+    },
+    
+    methods: {
+      getCategories(){
+          axios
+        .get("/customers/age/" + this.age)
+        .then(response => {
+          this.customers = response.data; // JSON are parsed automatically.
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+      }
+    },
+    mounted(){
+        this.getCategories()
+    }
+    };
 </script>
  
 <style scoped>
@@ -52,9 +79,12 @@
         width: 40%;
         margin-top: 12px;
     }
+    .logo a{
+        text-decoration: none;
+        color: #ffffff
+    }
     .logo h1{
         font-family: 'Lobster', cursive;
-        color: #ffffff
     }
     .menu {
         float: left;

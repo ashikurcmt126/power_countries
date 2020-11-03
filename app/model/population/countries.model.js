@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
     const Countries = sequelize.define('countries', {
-      country: {
+      country_name: {
       type: Sequelize.STRING
       },
       
